@@ -20,6 +20,7 @@ const Login = () => {
 
   // ENV
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  console.log(BASE_URL);
 
   const navigate = useNavigate();
 
@@ -56,11 +57,13 @@ const Login = () => {
       <div className="flex flex-col-reverse lg:flex-row items-center lg:gap-32 md:bg-white-200">
         <div className="left">
           <div className="flex justify-center mb-10">
-            <img
-              src={Logo}
-              alt="logo"
-              className="w-[250px] sm:w-[200px] md:w-[250px] lg:w-[350px]"
-            />
+            <Link to="/">
+              <img
+                src={Logo}
+                alt="logo"
+                className="w-[250px] sm:w-[200px] md:w-[250px] lg:w-[350px]"
+              />
+            </Link>
           </div>
 
           <div className="text-center mb-10">

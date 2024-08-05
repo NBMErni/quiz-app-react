@@ -1,13 +1,12 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import Countdown from "react-countdown";
 
-const CountdownTimer = ({ key, duration, onComplete }) => {
+const CountdownTimer = ({ uniqueKey, duration, onComplete }) => {
   return (
     <div className="text-lg font-bold">
       <Countdown
         className="font-bold text-5xl"
-        key={key}
+        key={uniqueKey}
         date={Date.now() + duration}
         onComplete={onComplete}
         renderer={({ minutes, seconds, completed }) => {

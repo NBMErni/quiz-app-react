@@ -61,6 +61,8 @@ const AdminDashboard = () => {
     try {
       const response = await axios.put(`${BASE_URL}QuizApp/${id}`, data);
       setQuestions(questions.map((q) => (q.quizId === id ? response.data : q)));
+
+      fetchQuizzes();
     } catch (error) {
       console.error("Error updating question:", error);
     }

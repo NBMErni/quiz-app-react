@@ -20,8 +20,8 @@ const ScoreModal = ({ correctAnswers, showModal, setShowModal }) => {
           <Confetti
             width={window.innerWidth}
             height={window.innerHeight}
-            numberOfPieces={500} // Adjust the number of pieces if needed
-            gravity={0.1} // Adjust the gravity if needed
+            numberOfPieces={500}
+            gravity={0.1}
           />
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full max-w-sm sm:max-w-md md:max-w-md mx-5 my-6 md:h-1/2 ">

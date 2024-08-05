@@ -1,6 +1,8 @@
+import "./App.css";
+
+//ROUTER
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./features/ProtectedRoute";
-import "./App.css";
 
 // PAGES
 import Login from "./Pages/Login/Login";
@@ -15,9 +17,23 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute redirectTo="/">
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute redirectTo="/">
+              <Register />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/works" element={<HowItWorks />} />
-        <Route path="/register" element={<Register />} />
 
         <Route
           path="/admin"
@@ -41,6 +57,3 @@ function App() {
 }
 
 export default App;
-
-// TODO
-// errorElement - react router dom

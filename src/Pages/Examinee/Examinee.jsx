@@ -1,22 +1,35 @@
 import { useState, useEffect } from "react";
-
 import CountdownTimer from "../../features/CountdowntTimer";
 import Header from "../../components/Header/Header";
 import Breadcrumbs from "../../features/Breadcrumbs";
 import ScoreModal from "../../features/ScoreModal";
+import axios from "axios";
 
 function Examinee() {
   // STATES
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
-
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-
   const [showModal, setShowModal] = useState(false);
+  const [quizData, setQuizData] = useState([]); // State for quiz data
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // HANDLE TIMER AND QUESTION CHANGES
+  // Fetch quiz data
+  const fetchQuizzes = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}QuizApp`);
+      setQuizData(response.data);
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
+
   useEffect(() => {
     if (isAnswered) {
       const timer = setTimeout(() => {
@@ -33,9 +46,8 @@ function Examinee() {
 
       return () => clearTimeout(timer);
     }
-  }, [isAnswered, currentQuestionIndex, correctAnswersCount]);
+  }, [isAnswered, currentQuestionIndex, quizData.length]);
 
-  // HANDLE ANSWER CLICK
   const handleAnswerClick = (answerIndex) => {
     if (isAnswered) return;
 
@@ -54,13 +66,8 @@ function Examinee() {
     setIsAnswered(true);
   };
 
-  // RTK ERROR HANDLERS
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading quizzes!</div>;
-  if (quizData.length === 0) return <div>No quizzes available</div>;
-
   // Breadcrumbs
-  const currentQuestion = quizData[currentQuestionIndex];
+  const currentQuestion = quizData[currentQuestionIndex] || {};
   const totalQuestions = quizData.length;
   const progressCurrent = currentQuestionIndex + 1;
 
@@ -92,7 +99,6 @@ function Examinee() {
           </div>
         </div>
 
-        {/* Add the CountdownTimer component here */}
         <div className="flex justify-center my-5">
           <CountdownTimer
             key={currentQuestionIndex} // Ensure the timer resets on question change
@@ -104,7 +110,7 @@ function Examinee() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 content-center lg:gap-28 md:gap-3 mx-10">
-          {currentQuestion.listOfPossibleAnswers.map((answer, i) => {
+          {currentQuestion.listOfPossibleAnswers?.map((answer, i) => {
             const isSelected = selectedAnswerIndex === i;
             const isCorrect = i === correctAnswerIndex;
             const borderColor = isSelected
