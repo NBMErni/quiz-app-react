@@ -1,5 +1,3 @@
-// src/App.jsx
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./features/ProtectedRoute";
 import "./App.css";
@@ -10,6 +8,7 @@ import Home from "./Pages/Homepage/Home";
 import Admin from "./Pages/Admin/Admin";
 import Examinee from "./Pages/Examinee/Examinee";
 import HowItWorks from "./Pages/HowItWorks/HowItWorks";
+import Register from "./Pages/Register/Register";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/works" element={<HowItWorks />} />
+        <Route path="/register" element={<Register />} />
 
         <Route
           path="/admin"
@@ -41,3 +41,6 @@ function App() {
 }
 
 export default App;
+
+// TODO
+// errorElement - react router dom

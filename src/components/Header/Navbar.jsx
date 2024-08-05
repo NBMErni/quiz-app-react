@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { logout } from "../../redux/authSlice";
 import { capitalizeFirstName } from "../../utils/capitalizedFirstName";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const role = useSelector((state) => state.auth.role);
   const username = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Navbar = () => {
   };
 
   const handleProfile = () => {
-    alert("Contact dev");
+    navigate("/admin");
   };
 
   return (
@@ -61,13 +62,13 @@ const Navbar = () => {
             </div>
             <ul className="flex flex-col items-center justify-between min-h-[250px]">
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/works">How it Works?</a>
+                <Link to="/works">How it Works?</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="#">Features</a>
+                <Link to="#">Features</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/contact">About us</a>
+                <Link to="/contact">About us</Link>
               </li>
               <li>
                 {isAuthenticated ? (
@@ -99,7 +100,7 @@ const Navbar = () => {
                               className="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
                               onClick={handleProfile}
                             >
-                              View Profile
+                              Admin Page
                             </Button>
                           </li>
                           <li>
@@ -131,13 +132,28 @@ const Navbar = () => {
 
         <ul className="hidden space-x-10 pr-2 lg:flex lg:items-center">
           <li>
-            <a href="/works">How it works?</a>
+            <Link
+              to="/works"
+              className="text-gray-400 hover:text-black transition ease-in-out duration-300 hover:shadowlg"
+            >
+              How it Works?
+            </Link>
           </li>
           <li>
-            <a href="/#">Features</a>
+            <Link
+              to="#"
+              className="text-gray-400 hover:text-black transition ease-in-out duration-300"
+            >
+              Features
+            </Link>
           </li>
           <li>
-            <a href="/contact">About us</a>
+            <Link
+              to="/contact"
+              className="text-gray-400 hover:text-black transition ease-in-out duration-300"
+            >
+              About us
+            </Link>
           </li>
           <li>
             {isAuthenticated ? (
@@ -164,13 +180,15 @@ const Navbar = () => {
                   <div className="absolute right-0  w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20 ">
                     <ul>
                       <li>
-                        <Button
-                          type="button"
-                          className="w-full  text-gray-700 hover:bg-gray-100 text-left"
-                          onClick={handleProfile}
-                        >
-                          View Profile
-                        </Button>
+                        {role === "admin" && (
+                          <Button
+                            type="button"
+                            className="w-full  text-gray-700 hover:bg-gray-100 text-left"
+                            onClick={handleProfile}
+                          >
+                            Admin Page
+                          </Button>
+                        )}
                       </li>
                       <li>
                         <Button

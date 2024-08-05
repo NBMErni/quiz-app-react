@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetQuizzesQuery } from "../../redux/questionSliceAPI";
+import { useState, useEffect } from "react";
+
 import CountdownTimer from "../../features/CountdowntTimer";
 import Header from "../../components/Header/Header";
 import Breadcrumbs from "../../features/Breadcrumbs";
@@ -11,16 +10,11 @@ function Examinee() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const [timerDuration, setTimerDuration] = useState(15000);
+
   const [showModal, setShowModal] = useState(false);
-
-  // NAVIGATE
-  const navigate = useNavigate();
-
-  // RTK Query
-  const { data: quizData = [], error, isLoading } = useGetQuizzesQuery();
 
   // HANDLE TIMER AND QUESTION CHANGES
   useEffect(() => {
@@ -39,7 +33,7 @@ function Examinee() {
 
       return () => clearTimeout(timer);
     }
-  }, [isAnswered, currentQuestionIndex, correctAnswersCount, quizData.length]);
+  }, [isAnswered, currentQuestionIndex, correctAnswersCount]);
 
   // HANDLE ANSWER CLICK
   const handleAnswerClick = (answerIndex) => {
@@ -69,7 +63,6 @@ function Examinee() {
   const currentQuestion = quizData[currentQuestionIndex];
   const totalQuestions = quizData.length;
   const progressCurrent = currentQuestionIndex + 1;
-  const progressTotal = totalQuestions;
 
   return (
     <>
@@ -103,7 +96,7 @@ function Examinee() {
         <div className="flex justify-center my-5">
           <CountdownTimer
             key={currentQuestionIndex} // Ensure the timer resets on question change
-            duration={timerDuration}
+            duration={15000}
             onComplete={() => {
               setIsAnswered(true); // Proceed to next question when timer completes
             }}

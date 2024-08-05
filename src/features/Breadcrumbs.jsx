@@ -1,10 +1,8 @@
-import React from "react";
-
 const Breadcrumbs = ({ currentStep, totalSteps }) => {
   const steps = Array.from({ length: totalSteps }, (_, index) => index + 1);
 
   return (
-    <div className="flex items-center justify-center flex-wrap">
+    <div className="flex items-center justify-center flex-wrap md:w-[500px] lg:w-full mx-auto">
       {steps.map((step, index) => (
         <div key={index} className="flex items-center m-2">
           <div

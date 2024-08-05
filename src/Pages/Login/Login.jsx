@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { login } from "../../redux/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import Logo from "../../assets/images/logo.svg";
@@ -17,8 +17,6 @@ const Login = () => {
   const dispatch = useDispatch();
 
   // SELECTORS
-  const user = useSelector((state) => state.auth.user);
-  const role = useSelector((state) => state.auth.role);
 
   // ENV
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -94,10 +92,10 @@ const Login = () => {
                 </div>
               )}
 
-              <div className="">
+              <div className="mb-8">
                 <Button
                   type="submit"
-                  className="bg-amber-400 hover:bg-gray-700 w-full rounded-full"
+                  className="bg-amber-400 hover:bg-gray-700 w-full rounded-full hover:text-white"
                 >
                   Sign in
                 </Button>
@@ -106,11 +104,11 @@ const Login = () => {
 
             {/* <input {...register("username",  {required: true, maxLength:20})}/> */}
 
-            <h1 className="text-center">
+            <h1 className="text-center ">
               Don't have an account yet?{" "}
-              <a href="/register" className="text-blue-600">
-                Register here
-              </a>
+              <Link to="/register" className="text-blue-600">
+                Register Here
+              </Link>
             </h1>
           </div>
         </div>

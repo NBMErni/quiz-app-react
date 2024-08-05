@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import vector from "../../assets/images/bg-vector.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //IMAGES
 import landingPagePic from "../../assets/images/landing-page-pic.svg";
@@ -46,12 +46,13 @@ const Home = () => {
               >
                 Start solving
               </button>
-              <a
-                href="/works"
+
+              <Link
+                to="/works"
                 className="py-2  text-amber-400 font-semibold hover:bg-amber-400 hover:text-white md:px-4 lg:px-8 lg:py-3 rounded-md lg:transition lg:ease-in-out lg:duration-300"
               >
                 Know more
-              </a>
+              </Link>
             </div>
           </div>
           <div className="">
