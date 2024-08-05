@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import vector from "../../assets/images/bg-vector.svg";
 import { useNavigate, Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
-//IMAGES
+//IMAGE
 import landingPagePic from "../../assets/images/landing-page-pic.svg";
 
 const Home = () => {
@@ -40,12 +41,12 @@ const Home = () => {
             </h3>
 
             <div className="flex lg:gap-20 justify-center md:justify-start md:items-center md:ml-1 ">
-              <button
-                className="mx-5 px-3 py-2  md:mx-3  lg:px-8 lg:py-3  lg:font-semibold bg-amber-400 text-white rounded-md"
+              <Button
+                className="mx-5 px-3 py-2 md:mx-3 lg:px-8 lg:py-3 lg:font-semibold bg-amber-400 text-white rounded-md"
                 onClick={handleStartExam}
               >
                 Start solving
-              </button>
+              </Button>
 
               <Link
                 to="/works"

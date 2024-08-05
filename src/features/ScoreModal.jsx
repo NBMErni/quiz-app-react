@@ -1,6 +1,6 @@
 import React from "react";
 import Confetti from "react-confetti";
-import score from "../assets/images/score-bg.svg"; // Ensure the path is correct
+import score from "../assets/images/score-bg.svg";
 import { getScoreMessage } from "../utils/scoreMessage";
 import { useNavigate } from "react-router-dom";
 
@@ -17,12 +17,14 @@ const ScoreModal = ({ correctAnswers, showModal, setShowModal }) => {
     <>
       {showModal && (
         <>
-          <Confetti
-            width={window.innerWidth}
-            height={window.innerHeight}
-            numberOfPieces={500}
-            gravity={0.1}
-          />
+          {correctAnswers > 0 && (
+            <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              numberOfPieces={500}
+              gravity={0.1}
+            />
+          )}
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full max-w-sm sm:max-w-md md:max-w-md mx-5 my-6 md:h-1/2 ">
               {/* Content */}

@@ -13,7 +13,7 @@ function Examinee() {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [quizData, setQuizData] = useState([]); // State for quiz data
+  const [quizData, setQuizData] = useState([]);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Fetch quiz data
@@ -94,17 +94,16 @@ function Examinee() {
               {currentQuestion.question}
             </h1>
           </div>
-          <div className="flex w-full lg:mb-10">
-            {/* <ProgressBar current={progressCurrent} total={progressTotal} /> */}
-          </div>
+          <div className="flex w-full lg:mb-10"></div>
         </div>
 
+        {/* COUNTDOWN TIMER */}
         <div className="flex justify-center my-5">
           <CountdownTimer
-            key={currentQuestionIndex} // Ensure the timer resets on question change
+            key={currentQuestionIndex}
             duration={15000}
             onComplete={() => {
-              setIsAnswered(true); // Proceed to next question when timer completes
+              setIsAnswered(true);
             }}
           />
         </div>

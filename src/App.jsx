@@ -1,8 +1,7 @@
-import "./App.css";
-
-//ROUTER
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./features/ProtectedRoute";
+import AuthRedirect from "./features/AuthRedirect";
+import "./App.css";
 
 // PAGES
 import Login from "./Pages/Login/Login";
@@ -20,20 +19,20 @@ function App() {
         <Route
           path="/login"
           element={
-            <ProtectedRoute redirectTo="/">
+            <AuthRedirect redirectTo="/">
               <Login />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <ProtectedRoute redirectTo="/">
-              <Register />
-            </ProtectedRoute>
+            </AuthRedirect>
           }
         />
         <Route path="/works" element={<HowItWorks />} />
+        <Route
+          path="/register"
+          element={
+            <AuthRedirect redirectTo="/">
+              <Register />
+            </AuthRedirect>
+          }
+        />
 
         <Route
           path="/admin"

@@ -96,7 +96,6 @@ const AdminDashboard = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Form Data:", data);
       if (currentQuestionId) {
         await handleUpdateQuestion(currentQuestionId, data);
         setCurrentQuestionId(null);
@@ -125,8 +124,6 @@ const AdminDashboard = () => {
       console.error("Question not found:", id);
     }
   };
-
-  console.log(questions);
 
   return (
     <>

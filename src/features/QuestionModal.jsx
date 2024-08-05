@@ -101,14 +101,6 @@ const QuestionModal = ({
                         </div>
                       )}
                     />
-                    <button
-                      type="button"
-                      onClick={() => remove(index)}
-                      className="bg-red-500 dark:text-white p-1 rounded"
-                      disabled={fields.length <= 4}
-                    >
-                      Remove
-                    </button>
                   </div>
                 ))}
                 {fields.length < 4 && (
