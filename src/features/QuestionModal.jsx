@@ -11,7 +11,6 @@ const QuestionModal = ({
   errors,
   fields,
   append,
-  remove,
   control,
 }) => {
   if (!showModal) return null;
@@ -117,7 +116,9 @@ const QuestionModal = ({
                 <button
                   type="submit"
                   className={`text-sm py-2 px-4 rounded ${
-                    currentQuestionId ? "bg-yellow-500" : "bg-green-500"
+                    currentQuestionId
+                      ? "bg-yellow-500 text-white font-bold"
+                      : "bg-green-500 text-white font-bold"
                   } dark:text-white`}
                 >
                   {currentQuestionId ? "Update Question" : "Add Question"}

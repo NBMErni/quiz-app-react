@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 import Header from "../../components/Header/Header";
 import QuestionModal from "../../features/QuestionModal";
-import axios from "axios";
+import SweetAlertComponent from "../../components/SweetAlertComponent";
 
 const AdminDashboard = () => {
   const [currentQuestionId, setCurrentQuestionId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const alert = SweetAlertComponent();
 
-  const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Fetch quizzes
@@ -29,6 +30,7 @@ const AdminDashboard = () => {
     fetchQuizzes();
   }, []);
 
+  //React forms
   const {
     control,
     handleSubmit,
@@ -48,10 +50,12 @@ const AdminDashboard = () => {
     name: "listOfPossibleAnswers",
   });
 
+  //functions
   const handleCreateQuestion = async (data) => {
     try {
       const response = await axios.post(`${BASE_URL}QuizApp`, data);
       setQuestions([...questions, response.data]);
+      alert.showSuccessMessage("Success!", "Question created successfully.");
     } catch (error) {
       console.error("Error creating question:", error);
     }
@@ -59,36 +63,44 @@ const AdminDashboard = () => {
 
   const handleUpdateQuestion = async (id, data) => {
     try {
+      console.log(id);
+      console.log(data);
       const response = await axios.put(`${BASE_URL}QuizApp/${id}`, data);
       setQuestions(questions.map((q) => (q.quizId === id ? response.data : q)));
-
+      alert.showSuccessMessage("Success!", "Question updated successfully.");
       fetchQuizzes();
     } catch (error) {
       console.error("Error updating question:", error);
     }
   };
 
+  const handleEditQuestion = (id) => {
+    console.log(id);
+    const questionToEdit = questions.find((q) => q.quizId === id);
+    if (questionToEdit) {
+      setValue("question", questionToEdit.question);
+      setValue("answer", questionToEdit.answer);
+      questionToEdit.listOfPossibleAnswers.forEach((answer, index) => {
+        setValue(`listOfPossibleAnswers.${index}`, answer);
+      });
+      setCurrentQuestionId(id);
+      setShowModal(true);
+    } else {
+      console.error("Question not found:", id);
+    }
+  };
+
   const handleDeleteQuestion = async (id) => {
     try {
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      });
-
-      if (result.isConfirmed) {
-        await axios.delete(`${BASE_URL}QuizApp/${id}`);
-        setQuestions(questions.filter((q) => q.quizId !== id));
-        await Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
+      alert.showConfirmMessage(
+        "Are you sure?",
+        "You won't be able to revert this!",
+        async () => {
+          await axios.delete(`${BASE_URL}QuizApp/${id}`);
+          setQuestions(questions.filter((q) => q.quizId !== id));
+          alert.showSuccessMessage("Deleted!", "Your file has been deleted.");
+        }
+      );
     } catch (error) {
       console.error("Error deleting question:", error);
     }
@@ -106,22 +118,6 @@ const AdminDashboard = () => {
       setShowModal(false);
     } catch (error) {
       console.error("Error submitting question:", error);
-    }
-  };
-
-  const handleEditQuestion = (id) => {
-    console.log(id);
-    const questionToEdit = questions.find((q) => q.quizId === id);
-    if (questionToEdit) {
-      setValue("question", questionToEdit.question);
-      setValue("answer", questionToEdit.answer);
-      questionToEdit.listOfPossibleAnswers.forEach((answer, index) => {
-        setValue(`listOfPossibleAnswers.${index}`, answer);
-      });
-      setCurrentQuestionId(id);
-      setShowModal(true);
-    } else {
-      console.error("Question not found:", id);
     }
   };
 

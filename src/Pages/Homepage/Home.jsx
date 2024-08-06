@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import vector from "../../assets/images/bg-vector.svg";
@@ -11,8 +10,7 @@ import landingPagePic from "../../assets/images/landing-page-pic.svg";
 const Home = () => {
   //SELECTORS
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
-  const role = useSelector((state) => state.auth.role);
+
   console.log(isAuthenticated);
 
   const navigate = useNavigate();

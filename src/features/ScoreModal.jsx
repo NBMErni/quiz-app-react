@@ -1,4 +1,3 @@
-import React from "react";
 import Confetti from "react-confetti";
 import score from "../assets/images/score-bg.svg";
 import { getScoreMessage } from "../utils/scoreMessage";

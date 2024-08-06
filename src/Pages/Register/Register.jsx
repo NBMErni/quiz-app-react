@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
+import SweetAlertComponent from "../../components/SweetAlertComponent";
 
 const Register = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
+  const alert = SweetAlertComponent();
 
   const {
     register,
@@ -37,12 +39,10 @@ const Register = () => {
       }
     } catch (error) {
       console.log("err", error);
-      Swal.fire({
-        icon: "error",
-        title: "User was not registered",
-        text: "Please check the inputs",
-        confirmButtonText: "Try Again",
-      });
+      alert.showErrorMessage(
+        "User was not registered",
+        "Please check the inputs"
+      );
     }
   };
 

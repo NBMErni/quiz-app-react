@@ -15,20 +15,22 @@ const HowItWorks = () => (
         </p>
         <ul className="list-disc list-inside pl-6 space-y-4">
           <li className="text-lg text-gray-800">
-            <a href="/register" className="text-blue-600 font-bold">
+            <Link to="/register" className="text-blue-600 font-bold">
               Register: &nbsp;
-            </a>
+            </Link>
             Create an account to get started with QuizGrad.
           </li>
           <li className="text-lg text-gray-800">
-            <a href="/login" className="text-blue-600 font-bold">
+            <Link to="/login" className="text-blue-600 font-bold">
               Login: &nbsp;
-            </a>{" "}
+            </Link>
             Access your quizzes and track your progress.
           </li>
           <li className="text-lg text-gray-800">
-            <a className="text-blue-600 font-bold">Quiz App: &nbsp;</a> Take
-            quizzes and review your results.
+            <Link to="/" className="text-blue-600 font-bold">
+              Quiz App: &nbsp;
+            </Link>
+            Take quizzes and review your results.
           </li>
         </ul>
       </main>
