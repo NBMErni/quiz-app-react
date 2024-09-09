@@ -54,18 +54,6 @@ const ScoreModal = ({ correctAnswers, showModal, setShowModal }) => {
                     </p>
                   </div>
                 </div>
-                {/* Footer */}
-                <div className="flex items-center justify-center  border-solid border-blue-200 rounded-b z-10 md:mt-7">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => {
-                      handleCloseModal();
-                    }}
-                  >
-                    Close
-                  </button>
-                </div>
               </div>
             </div>
           </div>

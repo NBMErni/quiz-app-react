@@ -27,10 +27,10 @@ const QuestionModal = ({
                 {currentQuestionId ? "Edit Question" : "Add Question"}
               </h3>
               <button
-                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                className="p-1 ml-auto  border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
               >
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <span className=" text-black  h-6 w-6 text-2xl block outline-none focus:outline-none">
                   ×
                 </span>
               </button>
@@ -115,7 +115,7 @@ const QuestionModal = ({
                 )}
                 <button
                   type="submit"
-                  className={`text-sm py-2 px-4 rounded ${
+                  className={`text-sm py-2 px-4 rounded flex ${
                     currentQuestionId
                       ? "bg-yellow-500 text-white font-bold"
                       : "bg-green-500 text-white font-bold"
@@ -124,16 +124,6 @@ const QuestionModal = ({
                   {currentQuestionId ? "Update Question" : "Add Question"}
                 </button>
               </form>
-            </div>
-            {/* Footer */}
-            <div className="flex items-center justify-center p-6 border-t border-solid border-blue-200 rounded-b">
-              <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>
